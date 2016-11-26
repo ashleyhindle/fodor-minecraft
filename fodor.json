@@ -25,7 +25,7 @@
         "title": "Game Mode",
         "name": "gamemode",
         "type": "select",
-        "options": ["survival", "creative"]
+        "options": ["Survival", "Creative"]
     }
   ]
 }
