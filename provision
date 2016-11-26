@@ -118,6 +118,9 @@ msm jargroup create minecraft minecraft
 msm server create fodor-minecraft
 msm fodor-minecraft jar minecraft
 
-echo "msm-version=minecraft/1.11.0" > /opt/msm/servers/fodor-minecraft/server.properties
+mkdir /opt/msm/servers/fodor-minecraft/logs/
+chown minecraft /opt/msm/servers/fodor-minecraft/logs/
+chmod u+wr /opt/msm/servers/fodor-minecraft/logs/
+echo "msm-version=minecraft/1.11.0" >> /opt/msm/servers/fodor-minecraft/server.properties
 
 msm fodor-minecraft start
