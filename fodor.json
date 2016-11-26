@@ -3,11 +3,11 @@
   "installpath": "/tmp/fodor-minecraft",
   "provisioner": "provision",
   "text": {
-    "complete": "Add your server with the domain {{DOMAIN}}"
+    "complete": "Add your server with the domain above"
   },
   "links": [
     {
-      "title": "Minecraft server properties for customisation",
+      "title": "Minecraft server properties for customisation (/opt/msm/servers/fodor-minecraft/server.properties)",
       "url": "http://minecraft.gamepedia.com/Server.properties"
     }
   ],
