@@ -21,6 +21,11 @@
   "homepage": "https://minecraft.net",
   "image": "https://minecraft.net/static/pages/img/minecraft-hero.df1112867f04.jpg",
   "inputs": [
-
+    {
+        "title": "Game Mode",
+        "name": "gamemode",
+        "type": "select",
+        "options": ["survival", "creative"]
+    }
   ]
 }
