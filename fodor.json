@@ -1,0 +1,26 @@
+{
+  "name": "ashleyhindle/fodor-minecraft",
+  "installpath": "/tmp/fodor-minecraft",
+  "provisioner": "provisioner",
+  "text": {
+    "complete": "Add your server with the domain {{DOMAIN}}"
+  },
+  "links": [
+    {
+      "title": "Minecraft server properties for customisation",
+      "url": "http://minecraft.gamepedia.com/Server.properties"
+    }
+  ],
+  "size": {
+    "suggested": "2048mb",
+    "required": "1024mb"
+  },
+  "distro": "ubuntu-14-04-x64",
+  "description": "Default Minecraft server setup with Minecraft Server Manager (MSM)",
+  "keywords": ["fodor", "minecraft", "msm", "server"],
+  "homepage": "https://minecraft.net",
+  "image": "https://minecraft.net/static/pages/img/minecraft-hero.df1112867f04.jpg",
+  "inputs": [
+
+  ]
+}
