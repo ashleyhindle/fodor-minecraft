@@ -12,8 +12,8 @@
     }
   ],
   "size": {
-    "suggested": "2048mb",
-    "required": "1024mb"
+    "suggested": "2gb",
+    "required": "1gb"
   },
   "distro": "ubuntu-14-04-x64",
   "description": "Default Minecraft server setup with Minecraft Server Manager (MSM)",
