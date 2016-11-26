@@ -121,6 +121,13 @@ msm fodor-minecraft jar minecraft
 mkdir /opt/msm/servers/fodor-minecraft/logs/
 chown minecraft /opt/msm/servers/fodor-minecraft/logs/
 chmod u+wr /opt/msm/servers/fodor-minecraft/logs/
+
 echo "msm-version=minecraft/1.11.0" >> /opt/msm/servers/fodor-minecraft/server.properties
 sed -i -e 's/eula=false/eula=true/g' /opt/msm/servers/fodor-minecraft/eula.txt
+
+if [ "$GAMEMODE" = "creative" ]
+  echo "gamemode 1" >> /opt/msm/servers/fodor-minecraft/server.properties
+fi
+
+
 msm fodor-minecraft start
