@@ -1,0 +1,119 @@
+#!/usr/bin/env bash
+
+apt-get update
+apt-get install -y screen rsync zip wget
+
+cat << EOF > > /etc/msm.conf
+# Minecraft Server Manager Configuration File
+
+# The user which Minecraft Server Manager commands will be executed as.
+# Also used by default for starting servers who do not specify an individual
+# server user.
+USERNAME="minecraft"
+
+# Where new servers are stored
+SERVER_STORAGE_PATH="/opt/msm/servers"
+
+# Where runnable jar files for use by servers are stored
+JAR_STORAGE_PATH="/opt/msm/jars"
+
+VERSIONING_STORAGE_PATH="/opt/msm/versioning"
+
+
+RAMDISK_STORAGE_ENABLED="true"
+
+RAMDISK_STORAGE_PATH="/dev/shm/msm"
+
+
+
+
+WORLD_ARCHIVE_ENABLED="true"
+WORLD_ARCHIVE_PATH="/opt/msm/archives/worlds"
+LOG_ARCHIVE_PATH="/opt/msm/archives/logs"
+
+BACKUP_ARCHIVE_PATH="/opt/msm/archives/backups"
+
+RDIFF_BACKUP_ENABLED="false"
+RDIFF_BACKUP_ROTATION="7"
+RDIFF_BACKUP_NICE="19"
+WORLD_RDIFF_PATH="/opt/msm/rdiff-backup/worlds"
+
+RSYNC_BACKUP_ENABLED="false"
+WORLD_RSYNC_PATH="/opt/msm/rsync/worlds"
+
+
+
+DEFAULT_USERNAME="minecraft"
+DEFAULT_SCREEN_NAME="msm-{SERVER_NAME}"
+DEFAULT_WORLD_STORAGE_PATH="worldstorage"
+DEFAULT_WORLD_STORAGE_INACTIVE_PATH="worldstorage_inactive"
+DEFAULT_COMPLETE_BACKUP_FOLLOW_SYMLINKS="false"
+
+
+# The location of standard Minecraft server files, relative to the
+# server directory
+DEFAULT_LOG_PATH="logs/latest.log"
+DEFAULT_PROPERTIES_PATH="server.properties"
+DEFAULT_WHITELIST_PATH="white-list.txt"
+DEFAULT_BANNED_PLAYERS_PATH="banned-players.txt"
+DEFAULT_BANNED_IPS_PATH="banned-ips.txt"
+DEFAULT_OPS_PATH="ops.txt"
+
+# List of comma-separated users that are added by default to ops.txt on server
+# creation.
+DEFAULT_OPS_LIST=""
+
+
+DEFAULT_JAR_PATH="server.jar"
+DEFAULT_RAM="1024"
+
+DEFAULT_INVOCATION="java -Xms{RAM}M -Xmx{RAM}M -XX:+UseConcMarkSweepGC -XX:+CMSIncrementalPacing -XX:+AggressiveOpts -jar {JAR} nogui"
+DEFAULT_STOP_DELAY=10
+DEFAULT_RESTART_DELAY=10
+DEFAULT_MESSAGE_STOP="SERVER SHUTTING DOWN IN {DELAY} SECONDS!"
+DEFAULT_MESSAGE_STOP_ABORT="Server shut down aborted."
+DEFAULT_MESSAGE_RESTART="SERVER REBOOT IN {DELAY} SECONDS!"
+
+DEFAULT_MESSAGE_RESTART_ABORT="Server reboot aborted."
+DEFAULT_MESSAGE_WORLD_BACKUP_STARTED="Backing up world."
+DEFAULT_MESSAGE_WORLD_BACKUP_FINISHED="Backup complete."
+
+DEFAULT_MESSAGE_COMPLETE_BACKUP_STARTED="Backing up entire server."
+
+DEFAULT_MESSAGE_COMPLETE_BACKUP_FINISHED="Backup complete."
+
+
+UPDATE_URL="https://raw.githubusercontent.com/msmhq/msm/master"
+EOF
+
+
+mkdir /opt/msm
+
+useradd minecraft --home /opt/msm
+chown minecraft /opt/msm
+chmod -R 775 /opt/msm
+
+mkdir /dev/shm/msm
+chown minecraft /dev/shm/msm
+chmod -R 775 /dev/shm/msm
+
+# TODO: store in our git repo for the init script
+wget http://git.io/J1GAxA -O /etc/init.d/msm
+chmod 755 /etc/init.d/msm
+update-rc.d msm defaults 99 10
+
+ln -s /etc/init.d/msm /usr/local/bin/msm
+
+msm update
+
+wget http://git.io/pczolg -O /etc/cron.d/msm
+service cron reload
+
+msm jargroup create minecraft minecraft
+
+msm server create fodor-minecraft
+msm fodor-minecraft jar minecraft
+
+echo "msm-version=minecraft/1.7.0" /opt/msm/servers/fodor-minecraft/server.properties
+
+msm fodor-minecraft start
