@@ -1,7 +1,7 @@
 {
   "name": "ashleyhindle/fodor-minecraft",
   "installpath": "/tmp/fodor-minecraft",
-  "provisioner": "provisioner",
+  "provisioner": "provision",
   "text": {
     "complete": "Add your server with the domain {{DOMAIN}}"
   },
