@@ -15,6 +15,17 @@ echo "/swapfile   none    swap    sw    0   0" >> /etc/fstab
 
 # TODO: Change DEFAULT_RAM based on digitalocean size (RAM available)
 
+TOTALRAM=$(free -m | awk '/^Mem:/{print $2}')
+DEFAULT_RAM=1024
+
+if [ $TOTALRAM -lt 1000 ]; then
+  DEFAULT_RAM=1024
+elif [ $TOTALRAM -lt 2000 ]; then
+  DEFAULT_RAM=2048
+elif [ $TOTALRAM -gt 2000 ]; then
+  DEFAULT_RAM=3072
+fi
+
 cat << EOF > /etc/msm.conf
 # Minecraft Server Manager Configuration File
 
@@ -35,8 +46,6 @@ VERSIONING_STORAGE_PATH="/opt/msm/versioning"
 RAMDISK_STORAGE_ENABLED="true"
 
 RAMDISK_STORAGE_PATH="/dev/shm/msm"
-
-
 
 
 WORLD_ARCHIVE_ENABLED="true"
@@ -77,7 +86,7 @@ DEFAULT_OPS_LIST=""
 
 
 DEFAULT_JAR_PATH="server.jar"
-DEFAULT_RAM="1024"
+RAM=$DEFAULT_RAM
 
 DEFAULT_INVOCATION="java -Xms{RAM}M -Xmx{RAM}M -XX:+UseConcMarkSweepGC -XX:+CMSIncrementalPacing -XX:+AggressiveOpts -jar {JAR} nogui"
 DEFAULT_STOP_DELAY=10
