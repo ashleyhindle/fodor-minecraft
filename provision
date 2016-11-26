@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
+add-apt-repository ppa:webupd8team/java
 apt-get update
-apt-get install -y screen rsync zip wget
+apt-get install -y screen rsync zip wget oracle-java8-installer
+
 
 cat << EOF > > /etc/msm.conf
 # Minecraft Server Manager Configuration File
