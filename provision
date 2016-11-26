@@ -125,7 +125,7 @@ chmod u+wr /opt/msm/servers/fodor-minecraft/logs/
 echo "msm-version=minecraft/1.11.0" >> /opt/msm/servers/fodor-minecraft/server.properties
 echo "eula=true" > /opt/msm/servers/fodor-minecraft/eula.txt
 
-if [ "$GAMEMODE" = "creative" ]
+if [ "$GAMEMODE" = "creative" ]; then
   echo "gamemode 1" >> /opt/msm/servers/fodor-minecraft/server.properties
 fi
 
