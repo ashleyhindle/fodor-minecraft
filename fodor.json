@@ -3,7 +3,7 @@
   "installpath": "/tmp/fodor-minecraft",
   "provisioner": "provision",
   "text": {
-    "complete": "Add your server with the domain above"
+    "complete": "Add your server with {{DOMAIN}}"
   },
   "links": [
     {
